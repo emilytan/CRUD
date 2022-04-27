@@ -1,79 +1,110 @@
-<h3>Create Read Update Delete Product</h3>
-<p>This table allows you to view all products,
-  add new product,
-  edit existing product,
-  and delete existing product</p>
-
-<div *ngIf="error" class="alert alert-warning" role="alert">
-  Error occured
+<div class="header">
+  <h3 class="title">Create Read Update Delete Product</h3>
+  <p class="description-text">
+    View products, create new product, update existing product, and delete
+    existing product
+  </p>
 </div>
 
-<button class="btn btn-primary" (click)="readProductList()">
-  <i class="bi bi-arrow-clockwise"></i> Refresh</button>
-<button class="btn btn-primary" (click)="addProduct()">
-  <i class="bi bi-plus-lg"></i> Create Product</button>
+<div *ngIf="error" class="alert alert-warning" role="alert">Error occured</div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Price</th>
-      <th scope="col">Quantity</th>
-    </tr>
-  </thead>
-  <ng-container *ngIf="loading; then showSpinner; else list"></ng-container>
-  <ng-template #showSpinner>
-    <div class="spinner-border" role="status">
-    </div>
-  </ng-template>
-  <ng-template #list>
-    <tbody>
-      <ng-container *ngFor="let data of dataTable">
-        <tr>
-          <td>{{data.id }} </td>
-          <td>{{data.name }} </td>
-          <td>{{data.price }} </td>
-          <td>{{data.quantity }} </td>
-          <td>
-            <button (click)="editProduct(data)">
-              <i class="bi bi-pencil"></i>
-            </button>
-          </td>
-          <td>
-            <button (click)="deleteProduct(data.id)">
-              <i class="bi bi-trash"></i>
-            </button>
-          </td>
-        </tr>
+<div class="buttons">
+  <button class="btn btn-primary" (click)="readProductList()">
+    <i class="bi bi-arrow-clockwise"></i> Refresh
+  </button>
+  <button class="btn btn-primary" (click)="addProduct()">
+    <i class="bi bi-plus-lg"></i> Create Product
+  </button>
+</div>
 
-      </ng-container>
-    </tbody>
-  </ng-template>
-</table>
-<br>
+<div class="border-table">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col" class="table-header">ID</th>
+        <th scope="col" class="table-header">Name</th>
+        <th scope="col" class="table-header">Price</th>
+        <th scope="col" class="table-header">Quantity</th>
+        <th scope="col" class="table-header">Update</th>
+        <th scope="col" class="table-header">Delete</th>
+      </tr>
+    </thead>
+    <ng-container *ngIf="loading; then showSpinner; else list"></ng-container>
+    <ng-template #showSpinner>
+      <div class="spinner-border" role="status"></div>
+    </ng-template>
+    <ng-template #list>
+      <tbody>
+        <ng-container *ngFor="let data of dataTable">
+          <tr>
+            <td>{{ data.id }}</td>
+            <td>{{ data.name }}</td>
+            <td>{{ data.price }}</td>
+            <td>{{ data.quantity }}</td>
+            <td>
+              <button class="button-icon" (click)="editProduct(data)">
+                <i class="bi bi-pencil"></i>
+              </button>
+            </td>
+            <td>
+              <button class="button-icon" (click)="deleteProduct(data.id)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </ng-template>
+  </table>
+</div>
+<br />
 
-<form [formGroup]="productForm" style="margin:0.5rem">
+<form [formGroup]="productForm" class="form">
   <div class="form-group row">
     <div class="col-6">
-      <label>ID</label>
-      <input type="number" class="form-control" formControlName="id" placeholder="Enter ID">
+      <label class="form-label">ID</label>
+      <input
+        type="number"
+        class="form-control"
+        formControlName="id"
+        placeholder="Enter ID"
+      />
     </div>
     <div class="col-6">
-      <label>Name</label>
-      <input class="form-control" formControlName="name" placeholder="Enter Name">
+      <label class="form-label">Name</label>
+      <input
+        class="form-control"
+        formControlName="name"
+        placeholder="Enter Name"
+      />
     </div>
   </div>
   <div class="form-group row">
     <div class="col-6">
-      <label>Price</label>
-      <input type="number" class="form-control" formControlName="price" placeholder="Enter Price">
+      <label class="form-label">Price</label>
+      <input
+        type="number"
+        class="form-control"
+        formControlName="price"
+        placeholder="Enter Price"
+      />
     </div>
     <div class="col-6">
-      <label>Quantity</label>
-      <input type="number" class="form-control" formControlName="quantity" placeholder="Enter Quantity">
+      <label class="form-label">Quantity</label>
+      <input
+        type="number"
+        class="form-control"
+        formControlName="quantity"
+        placeholder="Enter Quantity"
+      />
     </div>
   </div>
-  <button type="submit" class="btn btn-outline-primary" style="float: right;"
-    (click)="addEditProduct(productForm.value)">{{addOrEdit}}</button>
+  <button
+    type="submit"
+    class="btn btn-outline-primary"
+    style="float: right"
+    (click)="addEditProduct(productForm.value)"
+  >
+    {{ addOrEdit }}
+  </button>
 </form>
